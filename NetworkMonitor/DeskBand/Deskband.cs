@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ExampleWinforms
+namespace NetworkMonitor
 {
     [ComVisible(true)]
     [Guid("50888C49-7F68-49BB-AA65-A1912AAEA7AF")]
