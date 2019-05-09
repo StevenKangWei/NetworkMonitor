@@ -284,16 +284,16 @@ namespace NetworkMonitor
 
             //Console.WriteLine("received data " + received);
             long period = (milliseconds - last_received_time);
-            if(period == 0)
-            {
-                return 0;
-            }
-
             double data_count = received - this.last_received;
             last_received = received;
             last_received_time = milliseconds;
 
-            return data_count * 1000 / period;
+            if (period <= 0 || data_count <= 0)
+            {
+                return 0;
+            }
+            var speed = data_count * 1000 / period;
+            return speed;
         }
 
         public String getDownloadSpeedString()
@@ -325,16 +325,17 @@ namespace NetworkMonitor
 
             //Console.WriteLine("sent data " + sent);
             long period = (milliseconds - last_sent_time);
-            if (period == 0)
-            {
-                return 0;
-            }
-
             double data_count = sent - last_sent;
             last_sent = sent;
             last_sent_time = milliseconds;
 
-            return data_count * 1000 / period;
+            if (period <= 0 || data_count <= 0)
+            {
+                return 0;
+            }
+
+            var speed = data_count * 1000 / period;
+            return speed;
         }
 
         public String getUploadSpeedString()
