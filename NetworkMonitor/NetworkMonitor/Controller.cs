@@ -8,7 +8,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
-
+using System.Reflection;
 
 namespace NetworkMonitor
 {
@@ -68,41 +68,7 @@ namespace NetworkMonitor
             }
             return null;
         }
-           
-        public bool isBandRegistered()
-        {
-            //try
-            //{
-            //    Assembly band = Assembly.Load("NetworkMonitor");
-            //    if (band.GetName().GetPublicKeyToken() != null)
-            //    {
-            //        return true;
-            //    }
-            //    return false;
-            //}
-            //catch (FileNotFoundException)
-            //{
-            //    return false;
-            //}
-            //using (var classesRootKey = Microsoft.Win32.RegistryKey.OpenBaseKey(
-            //    Microsoft.Win32.RegistryHive.ClassesRoot,
-            //    Microsoft.Win32.RegistryView.Default)
-            //)
-            //{
-            //    const string clsid = "";
-            //    var clsIdKey = classesRootKey.OpenSubKey(@"Wow6432Node\CLSID\" + clsid) ??
-            //                    classesRootKey.OpenSubKey(@"CLSID\" + clsid);
-
-            //    if (clsIdKey != null)
-            //    {
-            //        clsIdKey.Dispose();
-            //        return true;
-            //    }
-            //    return false;
-            //}
-            return false;
-        }
-
+        
         public bool registerBand()
         {
             String deskband_path = this.getDeskBandPath();
@@ -129,6 +95,8 @@ namespace NetworkMonitor
 
         public bool unregisterBand()
         {
+            this.hideBand();
+
             String deskband_path = this.getDeskBandPath();
 
             Process process = new Process();
@@ -151,9 +119,11 @@ namespace NetworkMonitor
 
         public bool relsaseBand()
         {
+            this.unregisterBand();
+
             if (this.traydeskband != null && Marshal.IsComObject(this.traydeskband))
                 Marshal.ReleaseComObject(this.traydeskband);
-            this.unregisterBand();
+            
             Win32API.CoFreeUnusedLibraries();
 
             var handler = Win32API.FindWindow("Shell_TrayWnd", null);
@@ -173,7 +143,10 @@ namespace NetworkMonitor
         {
             if (this.isBandShown())
                 return true;
+            this.registerBand();
             var traydeskband = this.getTrayDeskband();
+            if (traydeskband == null)
+                return false;
             traydeskband.DeskBandRegistrationChanged();
             var hr = traydeskband.ShowDeskBand(ref this.deskbandGuid);
             //if (hr != 0)
@@ -187,6 +160,8 @@ namespace NetworkMonitor
             if (!this.isBandShown())
                 return true;
             var traydeskband = this.getTrayDeskband();
+            if (traydeskband == null)
+                return false;
             traydeskband.DeskBandRegistrationChanged();
             var hr = traydeskband.HideDeskBand(ref this.deskbandGuid);
             //if (hr != 0)
@@ -195,10 +170,23 @@ namespace NetworkMonitor
             return true;
         }
 
+        public void toggleBand()
+        {
+            if (this.isBandShown())
+            {
+                this.hideBand();
+            }
+            else
+            {
+                this.showBand();
+            }
+        }
 
         public bool isBandShown()
         {
             var traydeskband = this.getTrayDeskband();
+            if (traydeskband == null)
+                return false;
             var result = traydeskband.IsDeskBandShown(ref this.deskbandGuid);
             return result == 0;
         }

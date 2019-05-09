@@ -56,5 +56,10 @@ namespace NetworkMonitor
             this.timer.Interval = 1000;
             this.timer.Start();
         }
+
+        private void contextMenuStrip_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
     }
 }

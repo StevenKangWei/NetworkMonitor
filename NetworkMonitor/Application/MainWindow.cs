@@ -41,16 +41,9 @@ namespace NetworkMonitor
             }
         }
 
-        private void test_button_Click(object sender, EventArgs e)
+        private void toggle_button_Click(object sender, EventArgs e)
         {
-            if(this.controller.isBandShown())
-            {
-                this.controller.hideBand();
-            }
-            else
-            {
-                this.controller.showBand();
-            }
+            controller.toggleBand();
         }
 
         private void MainWindow_FormClosing(object sender, FormClosingEventArgs e)
@@ -111,24 +104,23 @@ namespace NetworkMonitor
 
         private void contextMenuStrip_Opening(object sender, CancelEventArgs e)
         {
-            this.controller.unregisterBand();
-        }
-
-        private void registerDeskbandToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.controller.registerBand();
+            
         }
 
         private void toggleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (this.controller.isBandShown())
-            {
-                this.controller.hideBand();
-            }
-            else
-            {
-                this.controller.showBand();
-            }
+            controller.toggleBand();
+        }
+
+        private void registerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            controller.registerBand();
+        }
+
+        private void unregisterToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            controller.hideBand();
+            controller.unregisterBand();
         }
     }
 }

@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace NetworkMonitor
 {
     [ComVisible(true)]
-    [Guid("07374F07-960A-4E51-BEA7-9DBA619FBBC7")]
+    [Guid(Controller.DESKBAND_GUID)]
     [CSDeskBand.CSDeskBandRegistration(Name = "NetworkMonitor", ShowDeskBand = false)]
     public class Deskband : CSDeskBand.CSDeskBandWin
     {

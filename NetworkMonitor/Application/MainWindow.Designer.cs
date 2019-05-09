@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainWindow));
-            this.test_button = new System.Windows.Forms.Button();
+            this.toggle_button = new System.Windows.Forms.Button();
             this.traffic_timer = new System.Windows.Forms.Timer(this.components);
             this.upload_label = new System.Windows.Forms.Label();
             this.download_label = new System.Windows.Forms.Label();
@@ -38,26 +38,26 @@
             this.interfaceListbox = new System.Windows.Forms.CheckedListBox();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deskbandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unregisterToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.toggleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
-            // test_button
+            // toggle_button
             // 
-            this.test_button.Location = new System.Drawing.Point(246, 9);
-            this.test_button.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.test_button.Name = "test_button";
-            this.test_button.Size = new System.Drawing.Size(159, 72);
-            this.test_button.TabIndex = 0;
-            this.test_button.Text = "Toggle Band";
-            this.test_button.UseVisualStyleBackColor = true;
-            this.test_button.Click += new System.EventHandler(this.test_button_Click);
+            this.toggle_button.Location = new System.Drawing.Point(246, 9);
+            this.toggle_button.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.toggle_button.Name = "toggle_button";
+            this.toggle_button.Size = new System.Drawing.Size(159, 72);
+            this.toggle_button.TabIndex = 0;
+            this.toggle_button.Text = "Toggle Band";
+            this.toggle_button.UseVisualStyleBackColor = true;
+            this.toggle_button.Click += new System.EventHandler(this.toggle_button_Click);
             // 
             // traffic_timer
             // 
@@ -120,22 +120,8 @@
             this.aboutToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(211, 104);
+            this.contextMenuStrip.Size = new System.Drawing.Size(145, 76);
             this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
-            // 
-            // aboutToolStripMenuItem
-            // 
-            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
-            this.aboutToolStripMenuItem.Text = "About";
-            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // deskbandToolStripMenuItem
             // 
@@ -144,27 +130,43 @@
             this.unregisterToolStripMenuItem1,
             this.toggleToolStripMenuItem});
             this.deskbandToolStripMenuItem.Name = "deskbandToolStripMenuItem";
-            this.deskbandToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.deskbandToolStripMenuItem.Size = new System.Drawing.Size(144, 24);
             this.deskbandToolStripMenuItem.Text = "Deskband";
             // 
             // registerToolStripMenuItem
             // 
             this.registerToolStripMenuItem.Name = "registerToolStripMenuItem";
-            this.registerToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.registerToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.registerToolStripMenuItem.Text = "Register";
+            this.registerToolStripMenuItem.Click += new System.EventHandler(this.registerToolStripMenuItem_Click);
             // 
             // unregisterToolStripMenuItem1
             // 
             this.unregisterToolStripMenuItem1.Name = "unregisterToolStripMenuItem1";
-            this.unregisterToolStripMenuItem1.Size = new System.Drawing.Size(216, 26);
+            this.unregisterToolStripMenuItem1.Size = new System.Drawing.Size(152, 26);
             this.unregisterToolStripMenuItem1.Text = "Unregister";
+            this.unregisterToolStripMenuItem1.Click += new System.EventHandler(this.unregisterToolStripMenuItem1_Click);
             // 
             // toggleToolStripMenuItem
             // 
             this.toggleToolStripMenuItem.Name = "toggleToolStripMenuItem";
-            this.toggleToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.toggleToolStripMenuItem.Size = new System.Drawing.Size(152, 26);
             this.toggleToolStripMenuItem.Text = "Toggle";
             this.toggleToolStripMenuItem.Click += new System.EventHandler(this.toggleToolStripMenuItem_Click);
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(144, 24);
+            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(144, 24);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -175,7 +177,7 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.download_label);
             this.Controls.Add(this.upload_label);
-            this.Controls.Add(this.test_button);
+            this.Controls.Add(this.toggle_button);
             this.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -194,7 +196,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button test_button;
+        private System.Windows.Forms.Button toggle_button;
         private System.Windows.Forms.Timer traffic_timer;
         private System.Windows.Forms.Label upload_label;
         private System.Windows.Forms.Label download_label;
