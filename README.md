@@ -6,8 +6,8 @@ A NetworkMonitor to show network speed in taskbar
 
 ## screenshot
 
-![](screenshots/screenshot1.png)
-![](screenshots/screenshot2.jpg)
+![](https://github.com/StevenKangWei/NetworkMonitor/raw/master/Screenshots/screenshot1.png)
+![](https://github.com/StevenKangWei/NetworkMonitor/raw/master/Screenshots/screenshot2.jpg)
 
 ## Thanks
 
