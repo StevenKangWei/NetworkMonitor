@@ -22,16 +22,11 @@ namespace NetworkMonitor
         string framework = Environment.GetEnvironmentVariable("SystemRoot")
             + @"\Microsoft.NET\Framework64\v4.0.30319\";
 
-        NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
+        public NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
 
-        List<NetworkInterface> interfaces = new List<NetworkInterface>();
+        public List<NetworkInterface> interfaces = new List<NetworkInterface>();
 
-        NetworkInterface adapter = null;
-
-        String[] interface_names =
-        {
-            "Intel(R) Dual Band Wireless-AC 8265"
-        };
+        public List<String> interface_names = NetworkManagerConfig.getNetworkInterfaces();
 
         TrayDeskband traydeskband = null;
         Guid deskbandGuid = new Guid(Controller.DESKBAND_GUID);
@@ -47,7 +42,9 @@ namespace NetworkMonitor
  
         public String getDeskBandPath()
         {
-            String path = Path.Combine(Application.StartupPath, "NetworkMonitor.dll");
+            var current_path = new Uri(System.Reflection.Assembly.GetExecutingAssembly().CodeBase).LocalPath;
+
+            String path = Path.Combine(Path.GetDirectoryName(current_path), "NetworkMonitor.dll");
             if (!File.Exists(path))
             {
                 throw new FileNotFoundException("NetworkMonitor.dll not found");
@@ -110,7 +107,7 @@ namespace NetworkMonitor
         {
             String deskband_path = this.getDeskBandPath();
 
-            Console.WriteLine(deskband_path);
+            //Console.WriteLine(deskband_path);
 
             Process process = new Process();
             process.StartInfo.FileName = this.framework + "regasm.exe";
@@ -122,8 +119,8 @@ namespace NetworkMonitor
             process.StartInfo.CreateNoWindow = true;
 
             process.Start();
-            Console.WriteLine(process.StartInfo.FileName);
-            Console.WriteLine(process.StartInfo.Arguments);
+            //Console.WriteLine(process.StartInfo.FileName);
+            //Console.WriteLine(process.StartInfo.Arguments);
             Console.WriteLine(process.StandardOutput.ReadToEnd());
             process.WaitForExit();
 
@@ -144,8 +141,8 @@ namespace NetworkMonitor
             process.StartInfo.CreateNoWindow = true;
 
             process.Start();
-            Console.WriteLine(process.StartInfo.FileName);
-            Console.WriteLine(process.StartInfo.Arguments);
+            //Console.WriteLine(process.StartInfo.FileName);
+            //Console.WriteLine(process.StartInfo.Arguments);
             Console.WriteLine(process.StandardOutput.ReadToEnd());
             process.WaitForExit();
 
@@ -209,6 +206,7 @@ namespace NetworkMonitor
 
         public void selectActiveNetworkInterfaces()
         {
+            this.interfaces.Clear();
             foreach (NetworkInterface adapter in adapters)
             {
                 if (this.interface_names.Contains(adapter.Description))
@@ -235,8 +233,10 @@ namespace NetworkMonitor
                 speed /= 1024;
                 unit += 1;
             }
-
-            speed = Math.Round(speed, 2);
+            if (speed > 1000)
+                speed = Math.Round(speed, 1);
+            else
+                speed = Math.Round(speed, 2);
             String unit_string = "";
             switch (unit)
             {
@@ -273,7 +273,7 @@ namespace NetworkMonitor
             {
                 var stat = adapter.GetIPv4Statistics();
                 received += stat.BytesReceived;
-                Console.WriteLine(adapter.Description + " " + stat.BytesReceived);
+                //Console.WriteLine(adapter.Description + " " + stat.BytesReceived);
             }
             if (last_received == 0)
             {
@@ -282,7 +282,7 @@ namespace NetworkMonitor
                 return 0;
             }
 
-            Console.WriteLine("received data " + received);
+            //Console.WriteLine("received data " + received);
             long period = (milliseconds - last_received_time);
             if(period == 0)
             {
@@ -290,7 +290,6 @@ namespace NetworkMonitor
             }
 
             double data_count = received - this.last_received;
-            Console.WriteLine(period);
             last_received = received;
             last_received_time = milliseconds;
 
@@ -315,7 +314,7 @@ namespace NetworkMonitor
             {
                 var stat = adapter.GetIPv4Statistics();
                 sent += stat.BytesSent;
-                Console.WriteLine(adapter.Description + " " + stat.BytesSent);
+                //Console.WriteLine(adapter.Description + " " + stat.BytesSent);
             }
             if (last_sent == 0)
             {
@@ -324,7 +323,7 @@ namespace NetworkMonitor
                 return 0;
             }
 
-            Console.WriteLine("sent data " + sent);
+            //Console.WriteLine("sent data " + sent);
             long period = (milliseconds - last_sent_time);
             if (period == 0)
             {
@@ -344,6 +343,9 @@ namespace NetworkMonitor
             return this.getSpeedString(speed);
         }
 
-
+        public void saveConfiguration()
+        {
+            NetworkManagerConfig.setNetworkInterfaces(interface_names);
+        }
     }
 }
