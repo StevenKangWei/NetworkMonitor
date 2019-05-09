@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace NetworkMonitor
 {
     [ComVisible(true)]
-    [Guid("50888C49-7F68-49BB-AA65-A1912AAEA7AF")]
+    [Guid("07374F07-960A-4E51-BEA7-9DBA619FBBC7")]
     [CSDeskBand.CSDeskBandRegistration(Name = "NetworkMonitor", ShowDeskBand = false)]
     public class Deskband : CSDeskBand.CSDeskBandWin
     {
@@ -18,7 +18,7 @@ namespace NetworkMonitor
 
         public Deskband()
         {
-            Options.MinHorizontalSize = new Size(100, 30);
+            Options.MinHorizontalSize = new Size(90, 50);
             _control = new UserControl(this);
         }
 
