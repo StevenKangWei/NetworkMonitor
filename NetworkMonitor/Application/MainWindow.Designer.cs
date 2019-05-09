@@ -35,13 +35,15 @@
             this.upload_label = new System.Windows.Forms.Label();
             this.download_label = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.interfaceListbox = new System.Windows.Forms.CheckedListBox();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.contextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.configureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.closeDeskbandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.interfaceListbox = new System.Windows.Forms.CheckedListBox();
+            this.deskbandToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.registerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.unregisterToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toggleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             this.contextMenuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -91,6 +93,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Network Interface";
             // 
+            // interfaceListbox
+            // 
+            this.interfaceListbox.AllowDrop = true;
+            this.interfaceListbox.CheckOnClick = true;
+            this.interfaceListbox.FormattingEnabled = true;
+            this.interfaceListbox.Location = new System.Drawing.Point(3, 26);
+            this.interfaceListbox.Name = "interfaceListbox";
+            this.interfaceListbox.Size = new System.Drawing.Size(384, 129);
+            this.interfaceListbox.TabIndex = 0;
+            this.interfaceListbox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.interfaceListbox_ItemCheck);
+            // 
             // notifyIcon
             // 
             this.notifyIcon.ContextMenuStrip = this.contextMenuStrip;
@@ -103,50 +116,55 @@
             // 
             this.contextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.configureToolStripMenuItem,
+            this.deskbandToolStripMenuItem,
             this.aboutToolStripMenuItem,
-            this.closeDeskbandToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(195, 100);
-            // 
-            // configureToolStripMenuItem
-            // 
-            this.configureToolStripMenuItem.Name = "configureToolStripMenuItem";
-            this.configureToolStripMenuItem.Size = new System.Drawing.Size(194, 24);
-            this.configureToolStripMenuItem.Text = "Configuration";
+            this.contextMenuStrip.Size = new System.Drawing.Size(211, 104);
+            this.contextMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip_Opening);
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(194, 24);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.aboutToolStripMenuItem.Text = "About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
-            // 
-            // closeDeskbandToolStripMenuItem
-            // 
-            this.closeDeskbandToolStripMenuItem.Name = "closeDeskbandToolStripMenuItem";
-            this.closeDeskbandToolStripMenuItem.Size = new System.Drawing.Size(194, 24);
-            this.closeDeskbandToolStripMenuItem.Text = "Toggle Deskband";
-            this.closeDeskbandToolStripMenuItem.Click += new System.EventHandler(this.toggleDeskbandToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(194, 24);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
-            // interfaceListbox
+            // deskbandToolStripMenuItem
             // 
-            this.interfaceListbox.AllowDrop = true;
-            this.interfaceListbox.CheckOnClick = true;
-            this.interfaceListbox.FormattingEnabled = true;
-            this.interfaceListbox.Location = new System.Drawing.Point(3, 26);
-            this.interfaceListbox.Name = "interfaceListbox";
-            this.interfaceListbox.Size = new System.Drawing.Size(384, 129);
-            this.interfaceListbox.TabIndex = 0;
-            this.interfaceListbox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.interfaceListbox_ItemCheck);
+            this.deskbandToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.registerToolStripMenuItem,
+            this.unregisterToolStripMenuItem1,
+            this.toggleToolStripMenuItem});
+            this.deskbandToolStripMenuItem.Name = "deskbandToolStripMenuItem";
+            this.deskbandToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
+            this.deskbandToolStripMenuItem.Text = "Deskband";
+            // 
+            // registerToolStripMenuItem
+            // 
+            this.registerToolStripMenuItem.Name = "registerToolStripMenuItem";
+            this.registerToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.registerToolStripMenuItem.Text = "Register";
+            // 
+            // unregisterToolStripMenuItem1
+            // 
+            this.unregisterToolStripMenuItem1.Name = "unregisterToolStripMenuItem1";
+            this.unregisterToolStripMenuItem1.Size = new System.Drawing.Size(216, 26);
+            this.unregisterToolStripMenuItem1.Text = "Unregister";
+            // 
+            // toggleToolStripMenuItem
+            // 
+            this.toggleToolStripMenuItem.Name = "toggleToolStripMenuItem";
+            this.toggleToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.toggleToolStripMenuItem.Text = "Toggle";
+            this.toggleToolStripMenuItem.Click += new System.EventHandler(this.toggleToolStripMenuItem_Click);
             // 
             // MainWindow
             // 
@@ -183,11 +201,13 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip;
-        private System.Windows.Forms.ToolStripMenuItem configureToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem closeDeskbandToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.CheckedListBox interfaceListbox;
+        private System.Windows.Forms.ToolStripMenuItem deskbandToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem registerToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem unregisterToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem toggleToolStripMenuItem;
     }
 }
 

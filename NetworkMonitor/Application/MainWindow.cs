@@ -74,14 +74,7 @@ namespace NetworkMonitor
 
         private void toggleDeskbandToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (this.controller.isBandShown())
-            {
-                this.controller.hideBand();
-            }
-            else
-            {
-                this.controller.showBand();
-            }
+            
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -114,6 +107,28 @@ namespace NetworkMonitor
 
             controller.selectActiveNetworkInterfaces();
             controller.saveConfiguration();
+        }
+
+        private void contextMenuStrip_Opening(object sender, CancelEventArgs e)
+        {
+            this.controller.unregisterBand();
+        }
+
+        private void registerDeskbandToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.controller.registerBand();
+        }
+
+        private void toggleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (this.controller.isBandShown())
+            {
+                this.controller.hideBand();
+            }
+            else
+            {
+                this.controller.showBand();
+            }
         }
     }
 }
