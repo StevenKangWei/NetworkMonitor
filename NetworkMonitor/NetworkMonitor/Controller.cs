@@ -78,7 +78,7 @@ namespace NetworkMonitor
 
             Process process = new Process();
             process.StartInfo.FileName = this.framework + "regasm.exe";
-            process.StartInfo.Arguments = " /nologo /codebase " + deskband_path;
+            process.StartInfo.Arguments = " /nologo /codebase " + String.Format("\"{0}\"", deskband_path);
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardInput = true;
             process.StartInfo.RedirectStandardOutput = true;
@@ -102,7 +102,7 @@ namespace NetworkMonitor
 
             Process process = new Process();
             process.StartInfo.FileName = this.framework + "regasm.exe";
-            process.StartInfo.Arguments = " /unregister " + deskband_path;
+            process.StartInfo.Arguments = " /unregister " + String.Format("\"{0}\"", deskband_path);
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardInput = true;
             process.StartInfo.RedirectStandardOutput = true;
