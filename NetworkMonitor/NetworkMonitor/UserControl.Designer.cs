@@ -41,15 +41,17 @@
             // upload_label
             // 
             this.upload_label.Dock = System.Windows.Forms.DockStyle.Top;
-            this.upload_label.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.upload_label.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.upload_label.Font = new System.Drawing.Font("Segoe UI Semilight", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.upload_label.ForeColor = System.Drawing.Color.White;
             this.upload_label.Location = new System.Drawing.Point(0, 0);
-            this.upload_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.upload_label.Margin = new System.Windows.Forms.Padding(0);
             this.upload_label.Name = "upload_label";
             this.upload_label.Size = new System.Drawing.Size(90, 25);
-            this.upload_label.TabIndex = 0;
-            this.upload_label.Text = "---.-- B/s";
+            this.upload_label.TabIndex = 1;
+            this.upload_label.Text = "------ M/s\r\n";
             this.upload_label.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.upload_label.UseCompatibleTextRendering = true;
             // 
             // contextMenuStrip
             // 
@@ -82,26 +84,28 @@
             // download_label
             // 
             this.download_label.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.download_label.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.download_label.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.download_label.Font = new System.Drawing.Font("Segoe UI Semilight", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.download_label.ForeColor = System.Drawing.Color.White;
             this.download_label.Location = new System.Drawing.Point(0, 25);
-            this.download_label.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.download_label.Margin = new System.Windows.Forms.Padding(0);
             this.download_label.Name = "download_label";
             this.download_label.Size = new System.Drawing.Size(90, 25);
             this.download_label.TabIndex = 2;
-            this.download_label.Text = "---.-- B/s";
+            this.download_label.Text = "------ B/s";
             this.download_label.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.download_label.UseCompatibleTextRendering = true;
+            this.download_label.UseMnemonic = false;
             // 
             // UserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Black;
             this.Controls.Add(this.download_label);
             this.Controls.Add(this.upload_label);
             this.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.Margin = new System.Windows.Forms.Padding(0);
             this.Name = "UserControl";
             this.Size = new System.Drawing.Size(90, 50);
             this.Load += new System.EventHandler(this.UserControl_Load);

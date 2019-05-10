@@ -78,7 +78,8 @@ namespace NetworkMonitor
 
         private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-
+            var size = controller.getTaskbarSize();
+            Console.WriteLine("task bar size " + size.Width + " " + size.Height);
         }
 
         private void interfaceListbox_SelectedValueChanged(object sender, EventArgs e)

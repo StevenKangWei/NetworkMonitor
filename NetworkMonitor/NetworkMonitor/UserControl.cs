@@ -12,7 +12,7 @@ namespace NetworkMonitor
 {
     public partial class UserControl: System.Windows.Forms.UserControl
     {
-        Controller controller = null;
+        public Controller controller = null;
         Deskband deskband = null;
         public UserControl(Deskband w)
         {

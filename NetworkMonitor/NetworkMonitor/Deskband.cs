@@ -18,8 +18,9 @@ namespace NetworkMonitor
 
         public Deskband()
         {
-            Options.MinHorizontalSize = new Size(90, 50);
             _control = new UserControl(this);
+            Options.MinHorizontalSize = new Size(90, 50);
+            UserControl control = (UserControl)_control;
         }
 
         protected override Control Control => _control;

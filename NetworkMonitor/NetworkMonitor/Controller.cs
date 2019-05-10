@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Net.NetworkInformation;
 using System.Runtime.InteropServices;
 using System.Reflection;
+using System.Drawing;
 
 namespace NetworkMonitor
 {
@@ -335,6 +336,43 @@ namespace NetworkMonitor
         public void saveConfiguration()
         {
             NetworkManagerConfig.setNetworkInterfaces(interface_names);
+        }
+
+        public Size getTaskbarSize()
+        {
+            int width = 0, height = 0;
+
+            if ((Screen.PrimaryScreen.Bounds.Width == Screen.PrimaryScreen.WorkingArea.Width) &&
+                (Screen.PrimaryScreen.WorkingArea.Y == 0))
+            {
+                //taskbar bottom
+                width = Screen.PrimaryScreen.WorkingArea.Width;
+                height = Screen.PrimaryScreen.Bounds.Height - Screen.PrimaryScreen.WorkingArea.Height;
+            }
+            else if ((Screen.PrimaryScreen.Bounds.Height == Screen.PrimaryScreen.WorkingArea.Height) &&
+                    (Screen.PrimaryScreen.WorkingArea.X == 0))
+            {
+                //taskbar right
+                width = Screen.PrimaryScreen.Bounds.Width - Screen.PrimaryScreen.WorkingArea.Width;
+                height = Screen.PrimaryScreen.WorkingArea.Height;
+            }
+            else if ((Screen.PrimaryScreen.Bounds.Width == Screen.PrimaryScreen.WorkingArea.Width) &&
+                    (Screen.PrimaryScreen.WorkingArea.Y > 0))
+            {
+                //taskbar up
+                width = Screen.PrimaryScreen.WorkingArea.Width;
+                //height = Screen.PrimaryScreen.WorkingArea.Y;
+                height = Screen.PrimaryScreen.Bounds.Height - Screen.PrimaryScreen.WorkingArea.Height;
+            }
+            else if ((Screen.PrimaryScreen.Bounds.Height == Screen.PrimaryScreen.WorkingArea.Height) &&
+                    (Screen.PrimaryScreen.WorkingArea.X > 0))
+            {
+                //taskbar left
+                width = Screen.PrimaryScreen.Bounds.Width - Screen.PrimaryScreen.WorkingArea.Width;
+                height = Screen.PrimaryScreen.WorkingArea.Height;
+            }
+
+            return new Size(width, height);
         }
     }
 }

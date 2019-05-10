@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -40,5 +41,9 @@ namespace NetworkMonitor
 
         [DllImport("ole32.dll")]
         public static extern void CoFreeUnusedLibrariesEx(UInt32 unloadDelay, UInt32 reserved);
+       
+        [DllImport("user32.dll")]
+        public static extern int GetWindowRect(int hwnd, ref Rectangle IpRect);
+        
     }
 }
